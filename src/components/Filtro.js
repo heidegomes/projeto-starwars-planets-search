@@ -1,19 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
+import StarWarsContext from '../context/StarWarsContext';
 
 function Filtro() {
-  const [inputs, setInputs] = useState({
-    name: '',
-    coluna: '',
-    quantity: '',
-    value: '',
-    ordenar: '',
-    ascendente: '',
-    descendente: '',
-  });
+  const { setFilterName, filterName } = useContext(StarWarsContext);
 
-  const handleChange = ({ target }) => {
-    setInputs({ ...inputs, [target.name]: target.value });
-  };
+  // const handleChange = ({ target }) => {
+  //   setInputs({ ...inputs, [target.name]: target.value }, () => filterByName);
+  // };
 
   return (
     <div>
@@ -21,10 +14,11 @@ function Filtro() {
         <label htmlFor="name">
           Projeto Star Wars - Trybe
           <input
+            data-testid="name-filter"
             type="text"
             name="name"
-            value={ inputs.name }
-            onChange={ handleChange }
+            value={ filterName }
+            onChange={ (event) => setFilterName(event.target.value) }
           />
         </label>
 
@@ -32,8 +26,8 @@ function Filtro() {
           Coluna
           <select
             name="coluna"
-            value={ inputs.coluna }
-            onChange={ handleChange }
+            // value={ inputs.coluna }
+            // onChange={ handleChange }
           >
             <option value="population">population</option>
             <option value="orbital_period">orbital_period</option>
@@ -48,8 +42,8 @@ function Filtro() {
           <select
             id="episode"
             name="quantity"
-            value={ inputs.quantity }
-            onChange={ handleChange }
+            // value={ inputs.quantity }
+            // onChange={ handleChange }
           >
             <option value="menor que">menor que</option>
             <option value="maior que">maior que</option>
@@ -60,8 +54,8 @@ function Filtro() {
         <input
           name="value"
           type="number"
-          value={ inputs.value }
-          onChange={ handleChange }
+          // value={ inputs.value }
+          // onChange={ handleChange }
         />
 
         <button
@@ -75,8 +69,8 @@ function Filtro() {
           Ordenar
           <select
             name="ordenar"
-            value={ inputs.ordenar }
-            onChange={ handleChange }
+            // value={ inputs.ordenar }
+            // onChange={ handleChange }
           >
             <option value="population">population</option>
             <option value="orbital_period">orbital_period</option>
@@ -91,8 +85,8 @@ function Filtro() {
           <input
             type="radio"
             name="ascendente"
-            value={ inputs.ascendente }
-            onChange={ handleChange }
+            // value={ inputs.ascendente }
+            // onChange={ handleChange }
             checked
           />
         </label>
@@ -102,8 +96,8 @@ function Filtro() {
           <input
             type="radio"
             name="descendente"
-            value={ inputs.descendente }
-            onChange={ handleChange }
+            // value={ inputs.descendente }
+            // onChange={ handleChange }
           />
         </label>
 
