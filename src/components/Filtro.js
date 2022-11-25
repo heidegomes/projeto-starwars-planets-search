@@ -3,31 +3,39 @@ import StarWarsContext from '../context/StarWarsContext';
 
 function Filtro() {
   const { setFilterName, filterName } = useContext(StarWarsContext);
+  const { selected, setSelected } = useContext(StarWarsContext);
+  const { selectedFilters, setSelectedFilters } = useContext(StarWarsContext);
 
   // const handleChange = ({ target }) => {
-  //   setInputs({ ...inputs, [target.name]: target.value }, () => filterByName);
+  //   setSelectedFilters({ ...inputs, [target.name]: target.value });
   // };
 
   return (
     <div>
       <form>
-        <label htmlFor="name">
+        <label htmlFor="name-filter">
           Projeto Star Wars - Trybe
           <input
             data-testid="name-filter"
+            placeholder="Digite o nome do planeta"
             type="text"
-            name="name"
+            name="name-filter"
             value={ filterName }
             onChange={ (event) => setFilterName(event.target.value) }
           />
         </label>
 
-        <label htmlFor="Coluna">
+        <label htmlFor="column">
           Coluna
           <select
-            name="coluna"
-            // value={ inputs.coluna }
-            // onChange={ handleChange }
+            data-testid="column-filter"
+            name="column"
+            value={ selected.column }
+            // onChange={ (event) => setSelectedFilters(event.target.value) }
+            onChange={ ({ target }) => setSelected((prevSelect) => ({
+              ...prevSelect,
+              column: target.value,
+            })) }
           >
             <option value="population">population</option>
             <option value="orbital_period">orbital_period</option>
@@ -37,30 +45,48 @@ function Filtro() {
           </select>
         </label>
 
-        <label htmlFor="Operador">
+        <label htmlFor="comparison-filter">
           Operador
           <select
-            id="episode"
-            name="quantity"
-            // value={ inputs.quantity }
-            // onChange={ handleChange }
+            data-testid="comparison-filter"
+            name="comparison"
+            value={ selected.comparison }
+            onChange={ ({ target }) => setSelected((prevSelect) => ({
+              ...prevSelect,
+              comparison: target.value,
+            })) }
           >
-            <option value="menor que">menor que</option>
             <option value="maior que">maior que</option>
+            <option value="menor que">menor que</option>
             <option value="igual a">igual a</option>
           </select>
         </label>
 
         <input
+          data-testid="value-filter"
           name="value"
           type="number"
-          // value={ inputs.value }
-          // onChange={ handleChange }
+          value={ selected.value }
+          onChange={ ({ target }) => setSelected((prevSelect) => ({
+            ...prevSelect,
+            value: target.value,
+          })) }
         />
 
         <button
+          data-testid="button-filter"
           type="button"
-        // onClick={ handleChange }
+          onClick={ () => {
+            setSelectedFilters((prevState) => ([
+              ...prevState,
+              selected,
+            ]));
+            setSelected({
+              column: 'population',
+              comparison: 'maior que',
+              value: 0,
+            });
+          } }
         >
           Filtrar
         </button>
@@ -108,7 +134,37 @@ function Filtro() {
           Ordenar
         </button>
 
+        <button
+          data-testid="button-remove-filters"
+          type="button"
+        // onClick={ handleChange }
+        >
+          Remover Filtros
+        </button>
       </form>
+
+      <div>
+        {selectedFilters.map((filter, index) => (
+          <div data-testid="filter" key={ index }>
+            <button
+              data-testid="filter"
+              type="button"
+              onClick={ () => {
+                const cloneArray = [...selectedFilters];
+                cloneArray.splice(index, 1);
+                setSelectedFilters(cloneArray);
+              } }
+            >
+              x
+            </button>
+            <span>
+              {filter.column}
+              {filter.comparison}
+              {filter.value}
+            </span>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
