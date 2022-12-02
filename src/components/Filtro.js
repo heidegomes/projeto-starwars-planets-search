@@ -5,10 +5,8 @@ function Filtro() {
   const { setFilterName, filterName } = useContext(StarWarsContext);
   const { selected, setSelected } = useContext(StarWarsContext);
   const { selectedFilters, setSelectedFilters } = useContext(StarWarsContext);
-
-  // const handleChange = ({ target }) => {
-  //   setSelectedFilters({ ...inputs, [target.name]: target.value });
-  // };
+  const { options } = useContext(StarWarsContext);
+  console.log(options);
 
   return (
     <div>
@@ -37,11 +35,7 @@ function Filtro() {
               column: target.value,
             })) }
           >
-            <option value="population">population</option>
-            <option value="orbital_period">orbital_period</option>
-            <option value="diameter">diameter</option>
-            <option value="rotation_period">rotation_period</option>
-            <option value="surface_water">surface_water</option>
+            {options.map((e) => <option value={ e } key={ e }>{ e }</option>)}
           </select>
         </label>
 
@@ -82,7 +76,7 @@ function Filtro() {
               selected,
             ]));
             setSelected({
-              column: 'population',
+              column: options[0],
               comparison: 'maior que',
               value: 0,
             });
@@ -94,6 +88,7 @@ function Filtro() {
         <label htmlFor="Ordenar">
           Ordenar
           <select
+            data-testid="column-sort"
             name="ordenar"
             // value={ inputs.ordenar }
             // onChange={ handleChange }
@@ -113,7 +108,6 @@ function Filtro() {
             name="ascendente"
             // value={ inputs.ascendente }
             // onChange={ handleChange }
-            checked
           />
         </label>
 
@@ -129,6 +123,7 @@ function Filtro() {
 
         <button
           type="button"
+          data-testid="column-sort-button"
           // onClick={ handleChange }
         >
           Ordenar

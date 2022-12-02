@@ -26,7 +26,7 @@ function Table() {
         <tbody>
           {
             data.map((e) => (
-              <tr key={ e.id }>
+              <tr key={ e.name }>
                 <td>{ e.name }</td>
                 <td>{ e.rotation_period }</td>
                 <td>{ e.orbital_period }</td>

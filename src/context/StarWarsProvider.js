@@ -54,6 +54,24 @@ function StarWarsProvider({ children }) {
     setData(filteredNameNConditions);
   }, [selectedFilters]);
 
+  // Atualiza opções de filtro conforme são usados
+  const [options, setOptions] = useState(['population',
+    'orbital_period',
+    'diameter',
+    'rotation_period',
+    'surface_water']);
+
+  useEffect(() => {
+    const arrColumnOptions = selectedFilters.map((e) => e.column);
+    const arrOptions = ['population',
+      'orbital_period',
+      'diameter',
+      'rotation_period',
+      'surface_water'];
+    const filtraOpcoes = arrOptions.filter((e) => !arrColumnOptions.includes(e));
+    setOptions(filtraOpcoes);
+  }, [selectedFilters]);
+
   // Use Memo
   const value = useMemo(() => ({
     data,
@@ -63,6 +81,8 @@ function StarWarsProvider({ children }) {
     setSelected,
     selectedFilters,
     setSelectedFilters,
+    options,
+    setOptions,
   }), [
     data,
     filterName,
@@ -71,6 +91,8 @@ function StarWarsProvider({ children }) {
     setSelected,
     selectedFilters,
     setSelectedFilters,
+    options,
+    setOptions,
   ]);
 
   return (
