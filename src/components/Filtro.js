@@ -6,7 +6,7 @@ function Filtro() {
   const { selected, setSelected } = useContext(StarWarsContext);
   const { selectedFilters, setSelectedFilters } = useContext(StarWarsContext);
   const { options } = useContext(StarWarsContext);
-  console.log(options);
+  const { order, setOrder } = useContext(StarWarsContext);
 
   return (
     <div>
@@ -90,14 +90,10 @@ function Filtro() {
           <select
             data-testid="column-sort"
             name="ordenar"
-            // value={ inputs.ordenar }
-            // onChange={ handleChange }
+            value={ order.column }
+            onChange={ (e) => setOrder({ ...order, column: e.target.value }) }
           >
-            <option value="population">population</option>
-            <option value="orbital_period">orbital_period</option>
-            <option value="diameter">diameter</option>
-            <option value="rotation_period">rotation_period</option>
-            <option value="surface_water">surface_water</option>
+            {options.map((e) => <option value={ e } key={ e }>{ e }</option>)}
           </select>
         </label>
 
@@ -105,9 +101,11 @@ function Filtro() {
           Ascendente
           <input
             type="radio"
-            name="ascendente"
-            // value={ inputs.ascendente }
-            // onChange={ handleChange }
+            data-testid="column-sort-input-asc"
+            name="orderDirection"
+            value="ASC"
+            checked={ order.sort === 'ASC' }
+            onChange={ ({ target }) => setOrder({ ...order, sort: target.value }) }
           />
         </label>
 
@@ -115,9 +113,11 @@ function Filtro() {
           Descendente
           <input
             type="radio"
-            name="descendente"
-            // value={ inputs.descendente }
-            // onChange={ handleChange }
+            data-testid="column-sort-input-desc"
+            name="orderDirection"
+            value="DESC"
+            checked={ order.sort === 'DESC' }
+            onChange={ ({ target }) => setOrder({ ...order, sort: target.value }) }
           />
         </label>
 
@@ -132,7 +132,14 @@ function Filtro() {
         <button
           data-testid="button-remove-filters"
           type="button"
-        // onClick={ handleChange }
+          onClick={ () => {
+            setSelectedFilters([]);
+            setSelected({
+              colum: '',
+              condition: '',
+              value: '',
+            });
+          } }
         >
           Remover Filtros
         </button>
@@ -142,7 +149,6 @@ function Filtro() {
         {selectedFilters.map((filter, index) => (
           <div data-testid="filter" key={ index }>
             <button
-              data-testid="filter"
               type="button"
               onClick={ () => {
                 const cloneArray = [...selectedFilters];

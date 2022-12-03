@@ -18,40 +18,44 @@ describe('Testa as opções para retonar resultados na tabela', () => {
     expect(global.fetch).toHaveBeenCalledTimes(1);
   });
 
-  test('Testa se ao carregar a página, é feita a requisição para preencher a tabela.', async() => {
-  global.fetch = jest.fn(() => Promise.resolve({
-    json: () => Promise.resolve(data),
-  }));
-  render(<App />);
-  const renderedTable = await screen.findByText('Tatooine');
-  expect(renderedTable).toBeInTheDocument();
-  expect(global.fetch).toBeInTheDocument();
+  test('Testa se ao carregar a página, é feita a requisição para preencher a tabela.', async () => {
+    global.fetch = jest.fn(() => Promise.resolve({
+      json: () => Promise.resolve(data),
+    }));
+    render(<App />);
+    const renderedTable = await screen.findByText('Tatooine');
+    expect(renderedTable).toBeInTheDocument();
+    // expect(global.fetch).toBeInTheDocument();
   });
 
-  xtest('Testa se ao selecionar coluna, operador e valor a tabela é preenchida somente com os valores que obedecem as condições', async () => {
+  test('Testa se ao selecionar coluna, operador e valor a tabela é preenchida somente com os valores que obedecem as condições', async () => {
     render(<App />);
     global.fetch = jest.fn(() => Promise.resolve({
       json: () => Promise.resolve(data),
     }));
 
-  act(() => {
-    const inputSelectColumn = screen.getByTestId("column-filter");
-    userEvent.selectOptions(inputSelectColumn, "orbital_period");
-  
-    const inputSelectComparison = screen.getByTestId("comparison-filter");
-    userEvent.selectOptions(inputSelectComparison, "maior que");
-  
-    const inputAddValue = screen.getByTestId("value-filter");
-    userEvent.type(inputAddValue, '5000');
-  
-    const buttonFiltrar = screen.getByRole('button', { name: 'Filtrar' });
-    userEvent.click(buttonFiltrar);
+    act(() => {
+      const inputSelectColumn = screen.getByTestId("column-filter");
+      userEvent.selectOptions(inputSelectColumn, "orbital_period");
+
+      const inputSelectComparison = screen.getByTestId("comparison-filter");
+      userEvent.selectOptions(inputSelectComparison, "maior que");
+
+      const inputAddValue = screen.getByTestId("value-filter");
+      userEvent.type(inputAddValue, '5000');
+
+      const buttonFiltrar = screen.getByRole('button', { name: 'Filtrar' });
+      userEvent.click(buttonFiltrar);
+    });
+
+    expect(planetMaiorQue).toBeInTheDocument();
   });
 
-  expect(planetMaiorQue).toBeInTheDocument();
-});
-
   xtest('Testa se ao carregar a página, é renderizada uma tabela com as colunas: Name, Rotation Period, Orbital Period, Diameter, Climate, Gravity, Terrain, Surface Water, Population, Films, Created, Edited, URL', () => {
+    render(<App />);
+    global.fetch = jest.fn(() => Promise.resolve({
+      json: () => Promise.resolve(data),
+    }));
     const columnHeader = [
       { name: 'Name' },
       { name: 'Rotation Period' },

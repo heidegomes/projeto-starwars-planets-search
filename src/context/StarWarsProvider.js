@@ -9,6 +9,7 @@ function StarWarsProvider({ children }) {
 
   useEffect(() => {
     requestAPIFetch().then((result) => {
+      console.log('Use effect data:', result);
       setDataFilterName(result);
       setData(result);
     });
@@ -72,6 +73,25 @@ function StarWarsProvider({ children }) {
     setOptions(filtraOpcoes);
   }, [selectedFilters]);
 
+  // Ordena os recultados
+  const [order, setOrder] = useState({
+    column: 'population',
+    sort: 'ASC',
+  });
+
+  // useEffect(() => {
+  //   const magicNumber = -1;
+  //   const ordenaDados = (a, b) => {
+  //     const { column, sort } = order;
+  //     if (sort === 'ASC') {
+  //       return (a[column] > b[column]) ? 1 : magicNumber;
+  //     } if (direction === 'DESC') {
+  //       return (a[column] < b[column]) ? 1 : magicNumber;
+  //     }
+  //   };
+  //   setOrder(ordenaDados);
+  // }, []);
+
   // Use Memo
   const value = useMemo(() => ({
     data,
@@ -83,6 +103,8 @@ function StarWarsProvider({ children }) {
     setSelectedFilters,
     options,
     setOptions,
+    order,
+    setOrder,
   }), [
     data,
     filterName,
@@ -93,6 +115,8 @@ function StarWarsProvider({ children }) {
     setSelectedFilters,
     options,
     setOptions,
+    order,
+    setOrder,
   ]);
 
   return (
