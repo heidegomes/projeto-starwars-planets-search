@@ -6,7 +6,7 @@ function Filtro() {
   const { selected, setSelected } = useContext(StarWarsContext);
   const { selectedFilters, setSelectedFilters } = useContext(StarWarsContext);
   const { options } = useContext(StarWarsContext);
-  const { order, setOrder } = useContext(StarWarsContext);
+  // const { order, setOrder } = useContext(StarWarsContext);/
 
   return (
     <div>
@@ -90,8 +90,8 @@ function Filtro() {
           <select
             data-testid="column-sort"
             name="ordenar"
-            value={ order.column }
-            onChange={ (e) => setOrder({ ...order, column: e.target.value }) }
+            // value={ order.column }
+            // onChange={ (e) => setOrder({ ...order, column: e.target.value }) }
           >
             {options.map((e) => <option value={ e } key={ e }>{ e }</option>)}
           </select>
@@ -102,10 +102,10 @@ function Filtro() {
           <input
             type="radio"
             data-testid="column-sort-input-asc"
-            name="orderDirection"
+            name="ASC"
             value="ASC"
-            checked={ order.sort === 'ASC' }
-            onChange={ ({ target }) => setOrder({ ...order, sort: target.value }) }
+            // checked={ order.sort === 'ASC' }
+            // onChange={ ({ target }) => setOrder({ ...order, sort: target.value }) }
           />
         </label>
 
@@ -114,10 +114,10 @@ function Filtro() {
           <input
             type="radio"
             data-testid="column-sort-input-desc"
-            name="orderDirection"
+            name="DESC"
             value="DESC"
-            checked={ order.sort === 'DESC' }
-            onChange={ ({ target }) => setOrder({ ...order, sort: target.value }) }
+            // checked={ order.sort === 'DESC' }
+            // onChange={ ({ target }) => setOrder({ ...order, sort: target.value }) }
           />
         </label>
 
