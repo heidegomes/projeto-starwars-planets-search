@@ -13,28 +13,28 @@ beforeEach(() => {
 })
 
 describe('Testa as opções para ordenar', () => {
-  test('Testa se ordena por ordem crescente de diametro', async () => {
+  test('Testa se ordena por ordem crescente e decrescente de população', async () => {
     render(
       <StarWarsProvider>
         <App />
       </StarWarsProvider>
     );
-
-    const selectOrder = screen.getByTestId(/column-sort/i);
-    // userEvent.click(inputOrdenar);
-
     
-    // const diameterOrdenar = screen.getByRole('listbox',['diameter']);
-    userEvent.selectOptions(selectOrder, '/diameter/i');
-    u
-
+    const selectOrder = await screen.findByTestId('column-sort');
     const inputAscendente = screen.getByTestId('column-sort-input-asc');
-    userEvent.click(inputAscendente);
-
-    const buttonOrdenar = screen.getByRole('button', { name: 'Ordenar' });
-    userEvent.click(buttonOrdenar);
-
-    expect().toBeInTheDocument();
+    const inputDescendente = screen.getByTestId('column-sort-input-desc');
+    const buttonOrdenar = screen.getByTestId('column-sort-button');
     
+    userEvent.selectOptions(selectOrder, 'population');
+    userEvent.click(inputAscendente);
+    userEvent.click(buttonOrdenar);
+    const planets = await screen.findAllByTestId('planet-name');
+    expect(planets[0]).toHaveTextContent('Tatooine');
 
-})
+    userEvent.selectOptions(selectOrder, 'population');
+    userEvent.click(inputDescendente);
+    userEvent.click(buttonOrdenar);
+    const planets2 = await screen.findAllByTestId('planet-name');
+    expect(planets2[0]).toHaveTextContent('Cooruscant');
+    });
+  })
