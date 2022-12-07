@@ -6,7 +6,7 @@ function Filtro() {
   const { selected, setSelected } = useContext(StarWarsContext);
   const { selectedFilters, setSelectedFilters } = useContext(StarWarsContext);
   const { options } = useContext(StarWarsContext);
-  // const { order, setOrder } = useContext(StarWarsContext);/
+  const { order, setOrder } = useContext(StarWarsContext);
 
   return (
     <div>
@@ -35,7 +35,7 @@ function Filtro() {
               column: target.value,
             })) }
           >
-            {options.map((e) => <option value={ e } key={ e }>{ e }</option>)}
+            {options.map((e) => <option value={ e } name={ e } key={ e }>{ e }</option>)}
           </select>
         </label>
 
@@ -50,9 +50,9 @@ function Filtro() {
               comparison: target.value,
             })) }
           >
-            <option value="maior que">maior que</option>
-            <option value="menor que">menor que</option>
-            <option value="igual a">igual a</option>
+            <option value="maior que" name="maior que">maior que</option>
+            <option value="menor que" name="menor que">menor que</option>
+            <option value="igual a" name="igual a">igual a</option>
           </select>
         </label>
 
@@ -70,6 +70,7 @@ function Filtro() {
         <button
           data-testid="button-filter"
           type="button"
+          name="Filtrar"
           onClick={ () => {
             setSelectedFilters((prevState) => ([
               ...prevState,
@@ -90,10 +91,10 @@ function Filtro() {
           <select
             data-testid="column-sort"
             name="ordenar"
-            // value={ order.column }
-            // onChange={ (e) => setOrder({ ...order, column: e.target.value }) }
+            value={ order.column }
+            onChange={ ({ target }) => setOrder({ ...order, column: target.value }) }
           >
-            {options.map((e) => <option value={ e } key={ e }>{ e }</option>)}
+            {options.map((e) => <option value={ e } name={ e } key={ e }>{ e }</option>)}
           </select>
         </label>
 
@@ -104,8 +105,8 @@ function Filtro() {
             data-testid="column-sort-input-asc"
             name="ASC"
             value="ASC"
-            // checked={ order.sort === 'ASC' }
-            // onChange={ ({ target }) => setOrder({ ...order, sort: target.value }) }
+            checked={ order.sort === 'ASC' }
+            onChange={ ({ target }) => setOrder({ ...order, sort: target.value }) }
           />
         </label>
 
@@ -116,15 +117,16 @@ function Filtro() {
             data-testid="column-sort-input-desc"
             name="DESC"
             value="DESC"
-            // checked={ order.sort === 'DESC' }
-            // onChange={ ({ target }) => setOrder({ ...order, sort: target.value }) }
+            checked={ order.sort === 'DESC' }
+            onChange={ ({ target }) => setOrder({ ...order, sort: target.value }) }
           />
         </label>
 
         <button
           type="button"
+          name="Ordenar"
           data-testid="column-sort-button"
-          // onClick={ handleChange }
+          onClick={ () => setOrder({ ...order }) }
         >
           Ordenar
         </button>
@@ -132,6 +134,7 @@ function Filtro() {
         <button
           data-testid="button-remove-filters"
           type="button"
+          name="Remover Filtros"
           onClick={ () => {
             setSelectedFilters([]);
             setSelected({
@@ -150,6 +153,7 @@ function Filtro() {
           <div data-testid="filter" key={ index }>
             <button
               type="button"
+              name="x"
               onClick={ () => {
                 const cloneArray = [...selectedFilters];
                 cloneArray.splice(index, 1);

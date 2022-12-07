@@ -73,24 +73,34 @@ function StarWarsProvider({ children }) {
     setOptions(filtraOpcoes);
   }, [selectedFilters]);
 
-  // // Ordena os recultados
-  // const [order, setOrder] = useState({
-  //   column: 'population',
-  //   sort: 'ASC',
-  // });
+  // Ordena os recultados
+  const [order, setOrder] = useState({
+    column: 'population',
+    sort: '',
+  });
 
-  // useEffect(() => {
-  //   const magicNumber = -1;
-  //   const ordenaDados = (a, b) => {
-  //     const { column, sort } = order;
-  //     if (sort === 'ASC') {
-  //       return (a[column] > b[column]) ? 1 : magicNumber;
-  //     } if (direction === 'DESC') {
-  //       return (a[column] < b[column]) ? 1 : magicNumber;
-  //     }
-  //   };
-  //   setOrder(ordenaDados);
-  // }, []);
+  const ordenaDados = (a, b) => {
+    const magicNumber = -1;
+    const { column, sort } = order;
+    if (sort === 'ASC') {
+      if (a[column] > b[column]) {
+        if (a[column] === 'unknown') { return 2; }
+        return 1;
+      }
+      return magicNumber;
+    } if (sort === 'DESC') {
+      if (a[column] < b[column]) {
+        if (a[column] === 'unknown') { return 2; }
+        return 1;
+      }
+      return magicNumber;
+    }
+  };
+
+  useEffect(() => {
+    const result = dataFilterName.sort(ordenaDados);
+    setData(result);
+  }, [order]);
 
   // Use Memo
   const value = useMemo(() => ({
@@ -103,8 +113,8 @@ function StarWarsProvider({ children }) {
     setSelectedFilters,
     options,
     setOptions,
-    // order,
-    // setOrder,
+    order,
+    setOrder,
   }), [
     data,
     filterName,
@@ -115,8 +125,8 @@ function StarWarsProvider({ children }) {
     setSelectedFilters,
     options,
     setOptions,
-    // order,
-    // setOrder,
+    order,
+    setOrder,
   ]);
 
   return (
