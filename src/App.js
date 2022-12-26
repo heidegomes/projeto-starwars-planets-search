@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './Global.css';
 import Filtro from './components/Filtro';
 import Table from './components/Table';
 import StarWarsProvider from './context/StarWarsProvider';

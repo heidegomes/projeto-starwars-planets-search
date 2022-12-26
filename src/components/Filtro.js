@@ -1,7 +1,9 @@
 import React, { useContext } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
+import styles from './Filtro.module.css';
 
 function Filtro() {
+  console.log(styles);
   const { setFilterName, filterName } = useContext(StarWarsContext);
   const { selected, setSelected } = useContext(StarWarsContext);
   const { selectedFilters, setSelectedFilters } = useContext(StarWarsContext);
@@ -9,143 +11,170 @@ function Filtro() {
   const { order, setOrder } = useContext(StarWarsContext);
 
   return (
-    <div>
+    <div className={ styles.filtro__container }>
       <form>
-        <label htmlFor="name-filter">
-          Projeto Star Wars - Trybe
-          <input
-            data-testid="name-filter"
-            placeholder="Digite o nome do planeta"
-            type="text"
-            name="name-filter"
-            value={ filterName }
-            onChange={ (event) => setFilterName(event.target.value) }
-          />
-        </label>
+        <div className={ styles.searchName }>
+          <div className={ styles.searchName__container }>
+            <label htmlFor="name-filter">
+              Projeto Star Wars - Trybe
+              <input
+                data-testid="name-filter"
+                placeholder="Digite o nome do planeta"
+                type="text"
+                name="name-filter"
+                value={ filterName }
+                onChange={ (event) => setFilterName(event.target.value) }
+              />
+            </label>
+          </div>
+        </div>
 
-        <label htmlFor="column">
-          Coluna
-          <select
-            data-testid="column-filter"
-            name="column"
-            value={ selected.column }
-            // onChange={ (event) => setSelectedFilters(event.target.value) }
-            onChange={ ({ target }) => setSelected((prevSelect) => ({
-              ...prevSelect,
-              column: target.value,
-            })) }
-          >
-            {options.map((e) => <option value={ e } name={ e } key={ e }>{ e }</option>)}
-          </select>
-        </label>
+        <div className={ styles.filtros_container }>
+          <div className={ styles.options }>
+            <label htmlFor="column">
+              Coluna
+              <select
+                className={ styles.selected }
+                data-testid="column-filter"
+                name="column"
+                value={ selected.column }
+                // onChange={ (event) => setSelectedFilters(event.target.value) }
+                onChange={ ({ target }) => setSelected((prevSelect) => ({
+                  ...prevSelect,
+                  column: target.value,
+                })) }
+              >
+                {options.map((e) => <option value={ e } name={ e } key={ e }>{ e }</option>)}
+              </select>
+            </label>
+          </div>
 
-        <label htmlFor="comparison-filter">
-          Operador
-          <select
-            data-testid="comparison-filter"
-            name="comparison"
-            value={ selected.comparison }
-            onChange={ ({ target }) => setSelected((prevSelect) => ({
-              ...prevSelect,
-              comparison: target.value,
-            })) }
-          >
-            <option value="maior que" name="maior que">maior que</option>
-            <option value="menor que" name="menor que">menor que</option>
-            <option value="igual a" name="igual a">igual a</option>
-          </select>
-        </label>
+          <div className={ styles.options }>
+            <label htmlFor="comparison-filter">
+              Operador
+              <select
+                className={styles.selected}
+                data-testid="comparison-filter"
+                name="comparison"
+                value={ selected.comparison }
+                onChange={ ({ target }) => setSelected((prevSelect) => ({
+                  ...prevSelect,
+                  comparison: target.value,
+                })) }
+              >
+                <option value="maior que" name="maior que">maior que</option>
+                <option value="menor que" name="menor que">menor que</option>
+                <option value="igual a" name="igual a">igual a</option>
+              </select>
+            </label>
+          </div>
+          <div className={ styles.options_input }>
+            <input
+              data-testid="value-filter"
+              name="value"
+              type="number"
+              value={ selected.value }
+              onChange={ ({ target }) => setSelected((prevSelect) => ({
+                ...prevSelect,
+                value: target.value,
+              })) }
+            />
+          </div>
 
-        <input
-          data-testid="value-filter"
-          name="value"
-          type="number"
-          value={ selected.value }
-          onChange={ ({ target }) => setSelected((prevSelect) => ({
-            ...prevSelect,
-            value: target.value,
-          })) }
-        />
+          <div className={ styles.options_button }>
+            <button
+              className={ styles.button }
+              data-testid="button-filter"
+              type="button"
+              name="Filtrar"
+              onClick={ () => {
+                setSelectedFilters((prevState) => ([
+                  ...prevState,
+                  selected,
+                ]));
+                setSelected({
+                  column: options[0],
+                  comparison: 'maior que',
+                  value: 0,
+                });
+              } }
+            >
+              FILTRAR
+            </button>
+          </div>
 
-        <button
-          data-testid="button-filter"
-          type="button"
-          name="Filtrar"
-          onClick={ () => {
-            setSelectedFilters((prevState) => ([
-              ...prevState,
-              selected,
-            ]));
-            setSelected({
-              column: options[0],
-              comparison: 'maior que',
-              value: 0,
-            });
-          } }
-        >
-          Filtrar
-        </button>
+          <div className={ styles.options }>
+            <label htmlFor="Ordenar">
+              Ordenar
+              <select
+                className={styles.selected}
+                data-testid="column-sort"
+                name="ordenar"
+                value={ order.column }
+                onChange={ ({ target }) => setOrder({ ...order, column: target.value }) }
+              >
+                {options.map((e) => <option value={ e } name={ e } key={ e }>{ e }</option>)}
+              </select>
+            </label>
+          </div>
 
-        <label htmlFor="Ordenar">
-          Ordenar
-          <select
-            data-testid="column-sort"
-            name="ordenar"
-            value={ order.column }
-            onChange={ ({ target }) => setOrder({ ...order, column: target.value }) }
-          >
-            {options.map((e) => <option value={ e } name={ e } key={ e }>{ e }</option>)}
-          </select>
-        </label>
+          <div className={styles.options_radio }>
+            <label htmlFor="Ascendente">
+              <input
+                type="radio"
+                data-testid="column-sort-input-asc"
+                name="ASC"
+                value="ASC"
+                checked={ order.sort === 'ASC' }
+                onChange={ ({ target }) => setOrder({ ...order, sort: target.value }) }
+              />
+              Ascendente
+            </label>
 
-        <label htmlFor="Ascendente">
-          Ascendente
-          <input
-            type="radio"
-            data-testid="column-sort-input-asc"
-            name="ASC"
-            value="ASC"
-            checked={ order.sort === 'ASC' }
-            onChange={ ({ target }) => setOrder({ ...order, sort: target.value }) }
-          />
-        </label>
+            <label htmlFor="Descendente">
+              <input
+                type="radio"
+                data-testid="column-sort-input-desc"
+                name="DESC"
+                value="DESC"
+                checked={ order.sort === 'DESC' }
+                onChange={ ({ target }) => setOrder({ ...order, sort: target.value }) }
+              />
+              Descendente
+            </label>
+          </div>
 
-        <label htmlFor="Descendente">
-          Descendente
-          <input
-            type="radio"
-            data-testid="column-sort-input-desc"
-            name="DESC"
-            value="DESC"
-            checked={ order.sort === 'DESC' }
-            onChange={ ({ target }) => setOrder({ ...order, sort: target.value }) }
-          />
-        </label>
+          <div className={styles.options_button }>
+            <button
+              className={ styles.button }
+              type="button"
+              name="Ordenar"
+              data-testid="column-sort-button"
+              onClick={ () => setOrder({ ...order }) }
+            >
+              ORDENAR
+            </button>
+          </div>
 
-        <button
-          type="button"
-          name="Ordenar"
-          data-testid="column-sort-button"
-          onClick={ () => setOrder({ ...order }) }
-        >
-          Ordenar
-        </button>
-
-        <button
-          data-testid="button-remove-filters"
-          type="button"
-          name="Remover Filtros"
-          onClick={ () => {
-            setSelectedFilters([]);
-            setSelected({
-              colum: '',
-              condition: '',
-              value: '',
-            });
-          } }
-        >
-          Remover Filtros
-        </button>
+          <div className={ styles.options_button }>
+            <button
+              className={ styles.button }
+              data-testid="button-remove-filters"
+              type="button"
+              name="Remover Filtros"
+              onClick={ () => {
+                setSelectedFilters([]);
+                setSelected({
+                  colum: '',
+                  condition: '',
+                  value: '',
+                });
+              } }
+            >
+              REMOVER FILTROS
+            </button>
+          </div>
+        </div>
       </form>
 
       <div>

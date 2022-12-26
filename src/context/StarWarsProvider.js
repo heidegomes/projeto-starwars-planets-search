@@ -90,7 +90,7 @@ function StarWarsProvider({ children }) {
       return magicNumber;
     } if (sort === 'DESC') {
       if (a[column] < b[column]) {
-        if (a[column] === 'unknown') { return 2; }
+        if (a[column] === 'unknown') { return magicNumber * 2; }
         return 1;
       }
       return magicNumber;
@@ -99,6 +99,7 @@ function StarWarsProvider({ children }) {
 
   useEffect(() => {
     const result = dataFilterName.sort(ordenaDados);
+    console.log('result: ', result);
     setData(result);
   }, [order]);
 
