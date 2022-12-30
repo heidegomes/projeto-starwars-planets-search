@@ -1,6 +1,6 @@
 # StarWars Planets Search
 
-<img src="exemplo-image.png" alt="exemplo imagem">
+<img src="StarWarsApp.png" alt="imagem da aplicação">
 
 > A aplicação renderiza uma lista dos planetas da saga Starwars, é possível filtrar a lista por nome e diferentes caracteristicas dos planetas, também permite mostrar o resultado de forma descendente ou ascendente, combinar filtros e removê-los.
 
