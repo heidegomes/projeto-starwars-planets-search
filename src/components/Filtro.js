@@ -196,7 +196,7 @@ function Filtro() {
             >
               x
             </button>
-            <span className={styles.filtro_selected_span}>
+            <span className={ styles.filtro_selected_span }>
               {filter.column} {filter.comparison} {filter.value}
             </span>
           </div>

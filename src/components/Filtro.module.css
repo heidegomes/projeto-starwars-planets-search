@@ -145,10 +145,11 @@
   /* border: green 1px solid; */
   /* padding-right: 78px;
   padding-left: 50px; */
+  width: 1040px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
-  padding-top: 22px;
+  padding: 22px 180px ;
 }
 
 .filtro_selected {
