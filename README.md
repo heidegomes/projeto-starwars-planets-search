@@ -13,8 +13,6 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 - [ ] Tornar o CSS responsivo
 - [ ] Transformas as urls em links
 
-Adicione comandos de execução e exemplos que você acha que os usuários acharão úteis. Fornece uma referência de opções para pontos de bônus!
-
 ## 📫 Contribuindo para StarWars planets Search
 
 Para contribuir com StarWars planets Search, siga estas etapas:
