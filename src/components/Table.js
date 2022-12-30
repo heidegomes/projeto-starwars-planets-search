@@ -1,11 +1,12 @@
 import React, { useContext } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
+import styles from './Table.module.css';
 
 function Table() {
   const { data } = useContext(StarWarsContext);
   return (
-    <div>
-      <table>
+    <div className={ styles.table__container }>
+      <table className={ styles.table }>
         <thead>
           <tr>
             <th>Name</th>
@@ -27,7 +28,12 @@ function Table() {
           {
             data.map((e) => (
               <tr key={ e.name }>
-                <td data-testid="planet-name">{ e.name }</td>
+                <td
+                  data-testid="planet-name"
+                >
+                  { e.name }
+
+                </td>
                 <td>{ e.rotation_period }</td>
                 <td>{ e.orbital_period }</td>
                 <td>{ e.diameter }</td>
@@ -44,8 +50,8 @@ function Table() {
             ))
           }
         </tbody>
-
       </table>
+
     </div>
   );
 }

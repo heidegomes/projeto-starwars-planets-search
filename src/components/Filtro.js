@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 import styles from './Filtro.module.css';
+import starWarsLogo from '../images/starWarsLogo.png';
 
 function Filtro() {
   console.log(styles);
@@ -12,6 +13,9 @@ function Filtro() {
 
   return (
     <div className={ styles.filtro__container }>
+      <div className={ styles.starWars__container }>
+        <img src={ starWarsLogo } alt="starWars" className={ styles.starWars } />
+      </div>
       <form>
         <div className={ styles.searchName }>
           <div className={ styles.searchName__container }>
@@ -53,7 +57,7 @@ function Filtro() {
             <label htmlFor="comparison-filter">
               Operador
               <select
-                className={styles.selected}
+                className={ styles.selected }
                 data-testid="comparison-filter"
                 name="comparison"
                 value={ selected.comparison }
@@ -107,7 +111,7 @@ function Filtro() {
             <label htmlFor="Ordenar">
               Ordenar
               <select
-                className={styles.selected}
+                className={ styles.selected }
                 data-testid="column-sort"
                 name="ordenar"
                 value={ order.column }
@@ -118,7 +122,7 @@ function Filtro() {
             </label>
           </div>
 
-          <div className={styles.options_radio }>
+          <div className={ styles.options_radio }>
             <label htmlFor="Ascendente">
               <input
                 type="radio"
@@ -144,7 +148,7 @@ function Filtro() {
             </label>
           </div>
 
-          <div className={styles.options_button }>
+          <div className={ styles.options_button }>
             <button
               className={ styles.button }
               type="button"
@@ -177,10 +181,11 @@ function Filtro() {
         </div>
       </form>
 
-      <div>
+      <div className={ styles.filtro_selected_container }>
         {selectedFilters.map((filter, index) => (
-          <div data-testid="filter" key={ index }>
+          <div data-testid="filter" key={ index } className={ styles.filtro_selected }>
             <button
+              className={ styles.button_x }
               type="button"
               name="x"
               onClick={ () => {
@@ -191,10 +196,8 @@ function Filtro() {
             >
               x
             </button>
-            <span>
-              {filter.column}
-              {filter.comparison}
-              {filter.value}
+            <span className={styles.filtro_selected_span}>
+              {filter.column} {filter.comparison} {filter.value}
             </span>
           </div>
         ))}
