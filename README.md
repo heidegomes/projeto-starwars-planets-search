@@ -1,4 +1,4 @@
-# StarWars planets search
+# StarWars Planets Search
 
 <img src="exemplo-image.png" alt="exemplo imagem">
 
@@ -13,7 +13,7 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 - [ ] Tornar o CSS responsivo
 - [ ] Transformas as urls em links
 
-## 📫 Contribuindo para StarWars planets Search
+## 📫 Contribuindo para StarWars Planets Search
 
 Para contribuir com StarWars planets Search, siga estas etapas:
 
