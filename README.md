@@ -1,39 +1,48 @@
 # StarWars Planets Search
+<div align="center">
+<img src="src/images/StarWarsApp.png" alt="Descrição da imagem" width="300" height="200">
+</div>
 
-<img src="StarWarsApp.png" alt="imagem da aplicação">
+
+## Contexto
 
 > A aplicação renderiza uma lista dos planetas da saga Starwars, é possível filtrar a lista por nome e diferentes caracteristicas dos planetas, também permite mostrar o resultado de forma descendente ou ascendente, combinar filtros e removê-los.
 
 
-### Ajustes e melhorias
+## Tecnologias usadas
 
-O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
-
-- [ ] Ajustar CSS dos inputs
-- [ ] Tornar o CSS responsivo
-- [ ] Transformas as urls em links
-
-## 📫 Contribuindo para StarWars Planets Search
-
-Para contribuir com StarWars planets Search, siga estas etapas:
-
-1. Bifurque este repositório.
-2. Crie um branch: `git checkout -b <nome_branch>`.
-3. Faça suas alterações e confirme-as: `git commit -m '<mensagem_commit>'`
-4. Envie para o branch original: `git push origin <nome_do_projeto> / <local>`
-5. Crie a solicitação de pull.
-
-Como alternativa, consulte a documentação do GitHub em [como criar uma solicitação pull](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
+- React Hooks
+- React com Context API
+- CSS module
 
 
+## Instalação do projeto localmente 
 
-## 😄 Seja um dos contribuidores<br>
+1. Primeiro abra o terminal e crie um diretório com o comando <strong>mkdir</strong>:
+``` 
+ mkdir projetos
+```
 
-Quer fazer parte desse projeto? Clique [AQUI](CONTRIBUTING.md) e leia como contribuir.
+2. Entre no diretório que acabou de criar e clone o projeto:
+``` 
+ cd projetos
+ git clone git@github.com:heidegomes/projeto-starwars-planets-search.git
+```
 
-## 📝 Licença
+3. Entre no diretório do projeto e instale as depenências necessárias: 
+``` 
+ cd projeto-starwars-planets-search
+ npm install
+```
 
-Esse projeto está sob licença. Veja o arquivo [LICENÇA](LICENSE.md) para mais detalhes.
+4.Por fim, rode o comando e acesse o projeto via browser, no caminho:
+``` 
+npm start
+http://localhost:3000/
+```
+
+
+
 
 [⬆ Voltar ao topo](#projeto-starwars-planets-search
 )<br>
